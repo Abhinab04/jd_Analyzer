@@ -1,0 +1,7 @@
+Name: John Doe
+
+Skills: Python, SQL, REST API
+
+Experience: Backend Developer (1 years)
+
+Projects: Built REST APIs using FastAPI
