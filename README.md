@@ -88,6 +88,3 @@ Example output:
 - Add or update skills in `utils/skill_extractor.py` for better extraction
 - Customize the LLM prompt in `prompt_templates/gap_analysis_prompt.txt`
 
-## Notes
-- If `OPENAI_API_KEY` is missing or the `openai` library is not installed, the tool still runs and provides skill matching and scoring.
-- The tool currently assumes the resume and JD are plain text.
