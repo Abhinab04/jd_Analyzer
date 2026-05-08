@@ -1,0 +1,59 @@
+{
+  "recommended_jobs": [
+    {
+      "job_title": "Senior FullStack UI  Python Developer",
+      "company": "Egen",
+      "location": "Hyderabad, Telangana",
+      "job_description": "Location: [Hyderabad] Experience: 6–12 Years About Egen Egen is a technology services company specializing in cloud, data, analytics, AI, and platform engineering. With a team of over 700 technology specialists across the US, Canada, Europe, and India, we help organizations unleash the power of cloud, data, and AI to create possibilities, empower people, and deliver real-world impact. As a recognized Google Cloud Services Leader, we partner with clients across industries to modernize infrastruc…",
+      "skills_required": [
+        "python"
+      ],
+      "job_url": "https://www.adzuna.in/land/ad/5689759489?se=AP93WqQy8RGJs8St2U2Huw&utm_medium=api&utm_source=20152b30&v=D017D773D3378CB932DB348EF14AFF24C99BD280"
+    },
+    {
+      "job_title": "HCL Unica Product_Lead Python Developer (ETL)_Pune/Mumbai",
+      "company": "HCLSoftware",
+      "location": "India",
+      "job_description": "Role – Python Developer – Enterprise Data & Application Integrations HCL Software ( hcl-software.com ) delivers software that fulfils the transformative needs of clients around the world. We build award winning software across AI, Automation, Data & Analytics, Security and Cloud. We are seeking a Senior Python Integration Developer with technical skills and experience in integrating enterprise applications, systems, middleware and data. Qualifications & Experiences. 6 yrs. of Python Development…",
+      "skills_required": [
+        "python"
+      ],
+      "job_url": "https://www.adzuna.in/land/ad/5523455332?se=AP93WqQy8RGJs8St2U2Huw&utm_medium=api&utm_source=20152b30&v=571A48A62553F16D2EF3A9825663ACAE54C1A70F"
+    },
+    {
+      "job_title": "Lead Backend Developer (Python/Django)",
+      "company": "SocialPost.ai",
+      "location": "Bangalore, Karnataka",
+      "job_description": "We are seeking an experienced Backend Lead with strong expertise in Python and Django to lead the design, development, and optimization of backend systems. The ideal candidate will guide the team in building scalable, secure, and high-performance APIs and services, while mentoring engineers and driving technical excellence. Key Responsibilities: · Lead the architecture, design, and development of backend systems using Python and Django. · Build and maintain scalable RESTful APIs with high perfo…",
+      "skills_required": [
+        "python",
+        "django"
+      ],
+      "job_url": "https://www.adzuna.in/land/ad/5674949249?se=AP93WqQy8RGJs8St2U2Huw&utm_medium=api&utm_source=20152b30&v=E5CD64CAF5EB91157DC4F2BAE22CBB1A8848D5C1"
+    },
+    {
+      "job_title": "Python Backend Developer",
+      "company": "LTIMindtree",
+      "location": "Bangalore, Karnataka",
+      "job_description": "Role: Python Experience: 6-12 yrs Notice Period: Immediate to 15 days Location: Bangalore Responsibilities Develop test and maintain web applications using Python and related frameworks like FlaskDjangoFastAPI Write clean maintainable and efficient code Fix and debug applications to ensure optimal performance Conduct various types of testing including unit testing and integration testing to ensure the robustness of the applications Participate in code reviews to maintain code quality and share …",
+      "skills_required": [
+        "python",
+        "testing"
+      ],
+      "job_url": "https://www.adzuna.in/land/ad/5685308842?se=AP93WqQy8RGJs8St2U2Huw&utm_medium=api&utm_source=20152b30&v=16F7D6C2FA53A0E75BFA7F28B0FFCC305BA41BB1"
+    },
+    {
+      "job_title": "Python Backend Developer (Django/DRF)",
+      "company": "W3Era Web Technology Pvt Ltd",
+      "location": "Jaipur, Rajasthan",
+      "job_description": "Location: On-site ( Jaipur) Employment type: Full-time Experience: Minimum 4-7 years of professional experience Role Overview We are seeking a Python Backend Developer to build secure, high‑performance RESTful APIs that power modern web applications. You will work closely with frontend teams using Next.js and React.js to deliver reliable integrations and excellent developer experience. Key Responsibilities • Design, build and maintain scalable RESTful APIs using Django and Django REST Framework…",
+      "skills_required": [
+        "python",
+        "rest",
+        "django",
+        "react"
+      ],
+      "job_url": "https://www.adzuna.in/land/ad/5674958591?se=AP93WqQy8RGJs8St2U2Huw&utm_medium=api&utm_source=20152b30&v=C9D417BB5B0613AD1B0E7FC67D3BE9F987417634"
+    }
+  ]
+}
