@@ -8,6 +8,9 @@ from typing import Dict, List, Optional
 from utils.skill_extractor import extract_skills
 from utils.skill_matcher import compare_skills
 from utils.scoring import compute_match_score
+from utils.job_scraper import SeleniumJobScraper
+from utils.job_filter import rank_jobs
+from utils.resume_parser import parse_resume
 
 
 def _is_url(source: str) -> bool:
@@ -216,20 +219,112 @@ def summarize_experience_gap(jd_text: str, resume_text: str) -> str:
     return f"Needs {missing}+ more years experience"
 
 
+def build_query(profile_role: str, profile_skills: List[str]) -> str:
+    top_skills = profile_skills[:4]
+    if top_skills:
+        return f"{profile_role} {' '.join(top_skills)}"
+    return profile_role
+
+
+def build_search_query(profile_role: str, profile_skills: List[str]) -> str:
+    if profile_skills:
+        return profile_skills[0]
+
+    role_parts = [part for part in re.split(r"\s+", profile_role.strip()) if part]
+    if role_parts:
+        return role_parts[0]
+
+    return "python"
+
+
+def run_job_recommendation(
+    resume_source: str,
+    platform: str,
+    max_fetch: int,
+    top_n: int,
+    custom_query: Optional[str],
+    location: str = "India",
+) -> Dict:
+    profile = parse_resume(resume_source)
+    query = custom_query.strip() if custom_query else build_search_query(profile.role, profile.skills)
+
+    scraper = SeleniumJobScraper(platform=platform, headless=True)
+    jobs = scraper.fetch_jobs(query=query, total_results=max_fetch, location=location)
+
+    recommended = rank_jobs(
+        jobs=jobs,
+        resume_skills=profile.skills,
+        target_role=profile.role,
+        candidate_years_of_exp=profile.years_of_experience,
+        top_n=top_n,
+    )
+    return {"recommended_jobs": recommended}
+
+
 def main() -> None:
-    parser = argparse.ArgumentParser(description="JD vs Resume Match Analyzer")
+    parser = argparse.ArgumentParser(description="Unified JD analyzer and job recommendation tool")
     parser.add_argument("--resume", required=True, help="Path to resume text file or URL")
-    parser.add_argument("--jd", required=True, help="Path to job description text file or URL")
+    parser.add_argument("--jd", help="Path to job description text file or URL (required in analyze mode)")
+    parser.add_argument(
+        "--mode",
+        choices=["analyze", "recommend"],
+        default=None,
+        help="analyze: JD vs resume analysis, recommend: fetch and rank jobs using Selenium",
+    )
     parser.add_argument(
         "--env-file",
         default=".env",
         help="Optional path to an env file containing GEMINI_API_KEY",
+    )
+    parser.add_argument(
+        "--platform",
+        choices=["glassdoor", "nauki"],
+        default="nauki",
+        help="Job platform to scrape from (default: nauki)",
+    )
+    parser.add_argument(
+        "--location",
+        default="India",
+        help="Location for job search (default: India)",
+    )
+    parser.add_argument("--max-fetch", type=int, default=35, help="Number of jobs to fetch (default: 35)")
+    parser.add_argument("--top-n", type=int, default=5, help="Final number of recommended jobs (default: 5)")
+    parser.add_argument("--query", default=None, help="Optional custom query for recommendation mode")
+    parser.add_argument(
+        "--output",
+        default="jd_fetcher/output/recommended_jobs.json",
+        help="Output JSON file path for recommendation mode",
     )
     args = parser.parse_args()
 
     # Load environment variables from file if provided
     if args.env_file:
         _load_env_file(Path(args.env_file))
+
+    if args.mode is None:
+        args.mode = "analyze" if args.jd else "recommend"
+
+    if args.mode == "recommend":
+        result = run_job_recommendation(
+            resume_source=args.resume,
+            platform=args.platform,
+            max_fetch=max(1, args.max_fetch),
+            top_n=max(3, min(5, args.top_n)),
+            custom_query=args.query,
+            location=args.location,
+        )
+
+        output_path = Path(args.output)
+        if not output_path.is_absolute():
+            output_path = Path(__file__).resolve().parent / output_path
+
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        output_path.write_text(json.dumps(result, indent=2, ensure_ascii=False), encoding="utf-8")
+        print(json.dumps(result, indent=2, ensure_ascii=False))
+        return
+
+    if not args.jd:
+        parser.error("--jd is required in analyze mode")
 
     resume_text = load_text(args.resume)
     jd_text = load_text(args.jd)
